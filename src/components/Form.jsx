@@ -6,18 +6,15 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { addExperience } from "../actions/index";
+import NavBar from "./Navbar"
 
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  errMess: () =>
-    dispatch({
-      type: "ERR_MSG"
-    }),
   setLoading: () =>
-    dispatch({
-      type: "LOADING"
-    }),
+  dispatch({
+    type: "LOADING"
+  }),
   addExperienceThunk: experience => dispatch(addExperience(experience))
 });
 
@@ -26,19 +23,15 @@ class ExperienceForm extends Component {
     super(params);
 
     this.state = {
-      role: "",
-      company: "",
-      description: "",
-      startDate: Date,
-      endDate: Date,
       experience: {}
+      }
     };
-  }
+
 
   onChange = async e => {
     const experience = this.state.experience;
     experience[e.currentTarget.id] = e.currentTarget.value;
-    console.log(experience[e.currentTarget.name]);
+    console.log(experience[e.currentTarget.id]);
     this.props.setLoading();
     this.setState({ experience: experience });
   };
@@ -51,28 +44,25 @@ class ExperienceForm extends Component {
   render() {
     return (
       <>
-        <Container>
-          <Row>
-            <Col></Col>
-            <Col>
+       <NavBar/>
+        <Container id = "contExp">
+          <Row className="mt-5 text-align-center">
+            <Col className="col-md-6 m-auto">
               <form
-                id="registerform"
-                className=" shadow p-3 mb-5 bg-white"
+                id="experienceForm"
+                className=" card card-body expCard"
                 onSubmit={e => this.onSubmit(e)}
               >
-                <div>
                   <label
                     style={{
                       color: " #052f5f",
                       fontWeight: "bold",
-                      // color: "#692799",
                       marginLeft: "35%"
                     }}
                   >
                     Add Experience
                   </label>
-                </div>
-                <div className="form-row">
+                  <div className="form-row">
                   <div className="col-md-6 mb-3">
                     <label className="label">Role Title</label>
                     <input
@@ -93,8 +83,7 @@ class ExperienceForm extends Component {
                       onChange={e => this.onChange(e)}
                     />
                   </div>
-                </div>
-                <div className="form-row">
+         
                   <div className="col-md-6 mb-3">
                     <label className="label">Description</label>
                     <input
@@ -114,7 +103,7 @@ class ExperienceForm extends Component {
                       onChange={e => this.onChange(e)}
                     />
                   </div>
-                </div>
+               
                 <div className="col-md-6 mb-3">
                   <label className="label">End Date</label>
                   <input
@@ -124,13 +113,13 @@ class ExperienceForm extends Component {
                     onChange={e => this.onChange(e)}
                   />
                 </div>
+                </div>
 
-                <button className="submitButton" type="submit">
-                  Register
+                <button className="btn btn-primary btn-block" type="submit">
+                 Add
                 </button>
               </form>
             </Col>
-            <Col></Col>
           </Row>
         </Container>
       </>

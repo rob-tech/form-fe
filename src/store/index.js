@@ -21,7 +21,7 @@ const initialState = {
   user: {
     user: {},
     token: undefined,
-    newUser: {}
+    newUser: {},
   },
 
 };

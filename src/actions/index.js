@@ -1,11 +1,14 @@
 export const addExperience = (experience) => async dispatch => {
-  try {
-    var res = await fetch("http://localhost:3000/form/experience", {
+
+  const token = localStorage.getItem("accessToken");
+
+  if (token) {
+    let res = await fetch("http://localhost:3000/form/experience", {
       method: "POST",
       body: JSON.stringify(experience),
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTRhNTQ5NTQxOTcwZDU1MGMxNmE1OTYiLCJpYXQiOjE1ODE5MzQ1NTMsImV4cCI6MTU4MTk0NTM1M30.TIU_BqT_vgUI5fLqBeK06wIvJzAmJo9teieKrfVh_1c"
+        "Authorization": 'Bearer ' + token,
+        "Content-Type": "application/json"
       }
     })
     if (res.ok) {
@@ -15,11 +18,9 @@ export const addExperience = (experience) => async dispatch => {
         payload: experienceRes
       })
     }
-
-  } catch (err) {
-    console.log(err)
   }
 }
+
 
 
 export const submitLogin = (user) => async dispatch => {
@@ -43,9 +44,9 @@ export const submitLogin = (user) => async dispatch => {
       })
 
       localStorage.setItem("accessToken", tokenJson.token)
-  
+
     }
-    else{
+    else {
       dispatch({
         type: "ERR_MSG",
         payload: "Username or password is wrong. If you don't have an account please register."
@@ -70,11 +71,11 @@ export const submitRegister = (user) => async dispatch => {
       dispatch({
         type: "NEW_USER",
         payload: newUser
-        
+
       })
 
     }
-    else{
+    else {
       dispatch({
         type: "ERR_MSG",
         payload: "You already have an account. Please log in."

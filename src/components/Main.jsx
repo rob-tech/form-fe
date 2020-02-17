@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ExperienceForm from "../components/Form";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Experience from "../components/Experience";
 
 const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
@@ -26,6 +27,7 @@ class Main extends Component {
             <Route path="/form" exact component={ExperienceForm} />
             <Route path="/" exact component={Login} />
             <Route path="/register" exact component={Register} /> 
+            <Route path="/experiences" exact component={Experience} /> 
           </Router>
     );
   }

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Alert } from "reactstrap";
-import { submitRegister } from "../actions/index";
+import { Alert, Container } from "reactstrap";
+import { submitRegister, submitLogin } from "../actions/index";
 
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  submitRegisterThunk: user => dispatch(submitRegister(user))
+  submitRegisterThunk: user => dispatch(submitRegister(user)),
+  submitLoginThunk: user => dispatch(submitLogin(user))
 });
 
 class Register extends Component {
@@ -20,20 +21,26 @@ class Register extends Component {
         name: "",
         surname: ""
       },
-
-      values: null,
-      errMess: ""
     };
   }
 
   register = async () => {
     await this.props.submitRegisterThunk(this.state.user);
+    const newUser = this.state.user
+    const username = newUser.email
+    const password = newUser.password
+    const user ={username, password}
+    await this.props.submitLoginThunk(user)
+    if(this.props.user.token){     
+      this.props.history.push("/form")
+  }
   };
 
   render() {
     return (
       <>
-        <div className="row mt-5">
+      <Container>
+        <div className="row mt-5 text-align-center">
           <div className="col-md-6 m-auto">
             <div className="card card-body registerCard">
               <h1 className="text-center mb-3">
@@ -131,6 +138,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+        </Container>
       </>
     );
   }
