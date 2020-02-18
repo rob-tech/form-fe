@@ -7,7 +7,7 @@ const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
   submitRegisterThunk: user => dispatch(submitRegister(user)),
-  submitLoginThunk: user => dispatch(submitLogin(user))
+  submitLoginThunk: user => dispatch(submitLogin(user)),
 });
 
 class Register extends Component {
@@ -21,21 +21,19 @@ class Register extends Component {
         name: "",
         surname: ""
       },
-      msg: undefined
     };
   }
 
   register = async () => {
     await this.props.submitRegisterThunk(this.state.user);
-    let msg = this.state.msg
-    msg = "You have been successfully registered. Last step is to log in!"
-      this.setState({msg: msg})
+
       this.setState({ user: {
         email: "",
         password: "",
         name: "",
         surname: ""
       }})
+
   };
 
   render() {
@@ -134,9 +132,9 @@ class Register extends Component {
                   {this.props.errMess.message}
                 </Alert>
               )}
-              {this.state.msg &&  (
+              {this.props.errMess.succMessage && (
                 <Alert className="loginAlert" color="primary">
-                {this.state.msg}
+                {this.props.errMess.succMessage}
               </Alert>
               )}
               <p className="lead mt-4">

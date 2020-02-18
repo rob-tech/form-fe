@@ -73,7 +73,10 @@ export const submitRegister = (user) => async dispatch => {
         payload: newUser
 
       })
-     return true
+      dispatch({
+        type: "SUCCESS_MSG",
+        payload: "You have been registered. Last step is to login"
+      })
     }
     else {
       dispatch({

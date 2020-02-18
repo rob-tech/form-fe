@@ -8,8 +8,7 @@ const mapDispatchToProps = dispatch => ({
   getExperiences: (allExperiences) =>
     dispatch({
       type: "EXPERIENCES",
-      payload: allExperiences
-    
+      payload: allExperiences   
     }),
     // errMess: (allExperiences) =>
     // dispatch({
@@ -17,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
     //   payload: {
     //     message: "add first exp",
     //   }
-    // })
+   // })
 });
 
 class Experience extends Component {

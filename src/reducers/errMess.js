@@ -6,6 +6,12 @@ export default function(state = {}, action) {
             message: action.payload
       
         }
+        case "SUCCESS_MSG":
+          return {
+            ...state,
+              succMessage: action.payload
+        
+          }
         default:
           return state;
     }

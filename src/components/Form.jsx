@@ -31,7 +31,6 @@ class ExperienceForm extends Component {
   onChange = async e => {
     const experience = this.state.experience;
     experience[e.currentTarget.id] = e.currentTarget.value;
-    console.log(experience[e.currentTarget.id]);
     this.props.setLoading();
     this.setState({ experience: experience });
   };
@@ -39,7 +38,7 @@ class ExperienceForm extends Component {
   onSubmit = async e => {
     e.preventDefault();
     await this.props.addExperienceThunk(this.state.experience);
-    this.setState({ experience: { role: "", company: ""}})
+    this.setState({ experience: { role: "", company: "",  description:"", endDate: Date, startDate:Date}})
   };
 
   render() {
