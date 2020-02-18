@@ -73,7 +73,7 @@ export const submitRegister = (user) => async dispatch => {
         payload: newUser
 
       })
-
+     return true
     }
     else {
       dispatch({

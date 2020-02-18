@@ -21,19 +21,21 @@ class Register extends Component {
         name: "",
         surname: ""
       },
+      msg: undefined
     };
   }
 
   register = async () => {
     await this.props.submitRegisterThunk(this.state.user);
-    // const newUser = this.state.user
-    // const username = newUser.email
-    // const password = newUser.password
-    // const user ={username, password}
-    // await this.props.submitLoginThunk(user)
-    // if(this.props.user.token){     
-      // this.props.history.push("/login")
-
+    let msg = this.state.msg
+    msg = "You have been successfully registered. Last step is to log in!"
+      this.setState({msg: msg})
+      this.setState({ user: {
+        email: "",
+        password: "",
+        name: "",
+        surname: ""
+      }})
   };
 
   render() {
@@ -131,6 +133,11 @@ class Register extends Component {
                 <Alert className="loginAlert" color="warning">
                   {this.props.errMess.message}
                 </Alert>
+              )}
+              {this.state.msg &&  (
+                <Alert className="loginAlert" color="primary">
+                {this.state.msg}
+              </Alert>
               )}
               <p className="lead mt-4">
                 Have An Account? <a href="/">Login</a>

@@ -39,6 +39,7 @@ class ExperienceForm extends Component {
   onSubmit = async e => {
     e.preventDefault();
     await this.props.addExperienceThunk(this.state.experience);
+    this.setState({ experience: { role: "", company: ""}})
   };
 
   render() {
@@ -70,6 +71,7 @@ class ExperienceForm extends Component {
                       className="form-control "
                       id="role"
                       required
+                      value={this.state.experience.role}
                       onChange={e => this.onChange(e)}
                     />
                   </div>
@@ -80,6 +82,7 @@ class ExperienceForm extends Component {
                       className="form-control"
                       id="company"
                       required
+                      value={this.state.experience.company}
                       onChange={e => this.onChange(e)}
                     />
                   </div>
@@ -91,6 +94,7 @@ class ExperienceForm extends Component {
                       className="form-control "
                       id="description"
                       required
+                      value={this.state.experience.description}
                       onChange={e => this.onChange(e)}
                     />
                   </div>
@@ -100,6 +104,7 @@ class ExperienceForm extends Component {
                       type="date"
                       className="form-control"
                       id="startDate"
+                      value={this.state.experience.startDate}
                       onChange={e => this.onChange(e)}
                     />
                   </div>
@@ -110,6 +115,7 @@ class ExperienceForm extends Component {
                     type="date"
                     className="form-control"
                     id="endDate"
+                    value={this.state.experience.endDate}
                     onChange={e => this.onChange(e)}
                   />
                 </div>
