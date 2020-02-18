@@ -26,14 +26,14 @@ class Register extends Component {
 
   register = async () => {
     await this.props.submitRegisterThunk(this.state.user);
-    const newUser = this.state.user
-    const username = newUser.email
-    const password = newUser.password
-    const user ={username, password}
-    await this.props.submitLoginThunk(user)
-    if(this.props.user.token){     
-      this.props.history.push("/form")
-  }
+    // const newUser = this.state.user
+    // const username = newUser.email
+    // const password = newUser.password
+    // const user ={username, password}
+    // await this.props.submitLoginThunk(user)
+    // if(this.props.user.token){     
+      // this.props.history.push("/login")
+
   };
 
   render() {
