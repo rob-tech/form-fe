@@ -47,7 +47,8 @@ class Experience extends Component {
             }
           });
     
-            const experiences = await res.json()
+            let experiences = await res.json()
+            experiences = experiences.experiences
             this.props.getExperiences(experiences);
           console.log(experiences)
         }
