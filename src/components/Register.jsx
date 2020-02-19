@@ -8,6 +8,11 @@ const mapStateToProps = state => state;
 const mapDispatchToProps = dispatch => ({
   submitRegisterThunk: user => dispatch(submitRegister(user)),
   submitLoginThunk: user => dispatch(submitLogin(user)),
+  setErrMess: (errMess, succMess) =>
+  dispatch({
+       type: "ERR_MSG",
+       payload: {succMessage: succMess, errMessage: errMess}
+     }),
 });
 
 class Register extends Component {
@@ -25,18 +30,30 @@ class Register extends Component {
   }
 
   register = async () => {
-    await this.props.submitRegisterThunk(this.state.user);
+    let res = await this.props.submitRegisterThunk(this.state.user);
 
-      this.setState({ user: {
-        email: "",
-        password: "",
-        name: "",
-        surname: ""
-      }})
-
+    if (res === true){
+      let succMess = "You have been registered. Last step is to login"
+      this.props.setErrMess(null, succMess)
+    } else {
+      let errMess = "You already have an account. Please log in."
+      this.props.setErrMess(errMess, null)
+    }
+ 
+  this.setState({ user: {
+    email: "",
+    password: "",
+    name: "",
+    surname: ""
+  }})
+    
   };
 
+  
+
+    
   render() {
+    console.log(this.props.errMess)
     return (
       <>
       <Container>
@@ -127,9 +144,9 @@ class Register extends Component {
               >
                 Register
               </button>
-              {this.props.errMess.message && (
+              {this.props.errMess.errMessage &&(
                 <Alert className="loginAlert" color="warning">
-                  {this.props.errMess.message}
+                  {this.props.errMess.errMessage}
                 </Alert>
               )}
               {this.props.errMess.succMessage && (

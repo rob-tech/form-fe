@@ -26,9 +26,6 @@ class Login extends Component {
       
             this.props.history.push("/form")
         }
-        else{
-            this.props.history.push("/register")
-        }
     }
 
     render() {

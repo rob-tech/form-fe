@@ -21,8 +21,6 @@ export const addExperience = (experience) => async dispatch => {
   }
 }
 
-
-
 export const submitLogin = (user) => async dispatch => {
   try {
     var res = await fetch("http://localhost:3000/user/login", {
@@ -42,7 +40,10 @@ export const submitLogin = (user) => async dispatch => {
           token: tokenJson.token
         }
       })
-
+      dispatch({
+        type: "ERR_MSG",
+        payload: null
+      })
       localStorage.setItem("accessToken", tokenJson.token)
 
     }
@@ -72,18 +73,15 @@ export const submitRegister = (user) => async dispatch => {
         type: "NEW_USER",
         payload: newUser
 
-      })
-      dispatch({
-        type: "SUCCESS_MSG",
-        payload: "You have been registered. Last step is to login"
-      })
+    })
+
+      return true
     }
+
     else {
-      dispatch({
-        type: "ERR_MSG",
-        payload: "You already have an account. Please log in."
-      })
+      return false
     }
+
   } catch (err) {
     console.log(err)
   }

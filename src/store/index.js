@@ -9,7 +9,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const initialState = {
   errMess: {
-    message: null,
+    errMessage: null,
     succMessage: null
   },
   loader: {

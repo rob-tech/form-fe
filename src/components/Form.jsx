@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
   dispatch({
     type: "LOADING"
   }),
-  addExperienceThunk: experience => dispatch(addExperience(experience))
+   addExperienceThunk: experience => dispatch(addExperience(experience))
 });
 
 class ExperienceForm extends Component {
@@ -39,6 +39,7 @@ class ExperienceForm extends Component {
     e.preventDefault();
     await this.props.addExperienceThunk(this.state.experience);
     this.setState({ experience: { role: "", company: "",  description:"", endDate: Date, startDate:Date}})
+
   };
 
   render() {
